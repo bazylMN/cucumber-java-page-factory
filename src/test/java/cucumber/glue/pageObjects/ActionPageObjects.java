@@ -7,12 +7,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.springframework.context.annotation.Lazy;
 
-@Lazy
 @PageObject
 public class ActionPageObjects extends BasePage {
 
-    public ActionPageObjects(WebDriverManager driver) {
-        super(driver);
+    public ActionPageObjects(WebDriverManager webDriverManager) {
+        super(webDriverManager);
     }
 
     @FindBy (how= How.CSS,  using=".Header-nav-item[href*=jam]")

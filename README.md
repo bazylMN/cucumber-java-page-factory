@@ -1,5 +1,5 @@
 # Cucumber-java-page-factory template
-#### with Cucumber-java, Cucumber Spring, custom annotation @PageObject, Selenium PageFactory and webdriver manager (Selenium WebDriver) for:
+#### with Cucumber-java, Cucumber Spring, custom annotation @PageObject, lambda expression ready, Selenium PageFactory and webdriver manager (Selenium WebDriver) for:
 * ##### chrome
 * ##### firefox
 * ##### chrome headless
@@ -19,16 +19,15 @@
 * import dependencies with gradle
 
 ### How to use PageFactory annotations (@FindBy etc.)
-Extend page object class / classes with BasePage class and add annotations: @Lazy and @PageObject. Create methods with @FindBy etc. annotations.
+Extend page object class / classes with BasePage class and add annotation: @PageObject. Create methods with @FindBy etc. annotations.
 
 ###### Example in template:
 ```
-@Lazy
 @PageObject
 public class ActionPageObjects extends BasePage {
 
-    public ActionPageObjects(WebDriverManager driver) {
-        super(driver);
+    public ActionPageObjects(WebDriverManager webDriverManager) {
+        super(webDriverManager);
     }
 
     @FindBy (how= How.CSS,  using=".Header-nav-item[href*=jam]")
@@ -43,12 +42,25 @@ public class ActionPageObjects extends BasePage {
 ### Custom annotation @PageObject
 Add @PageObject in page object classes instead of Spring @Component annotation
 
+### Lambda expression ready
+Steps classes implements En interface and are prepared to use code by 'lambda-way'. Example of lambda expression is used in SignUpFormPageObjects class:
+```
+    private void sendKeysForInputWithAttributeName(String partValueName, String keyToSend){
+        webDriverManager.getDriver().findElements(By.cssSelector(USER_INPUT))
+                .stream()
+                .filter(elem->elem.getAttribute(USER_INPUT_ATTRIBUTE_NAME).contains(partValueName))
+                .findFirst()
+                .get()
+                .sendKeys(keyToSend);
+    }
+```
+
 ### Customise Cucumber tests
 * add your .feature files with scenarios
 * create custom steps class / steps classes with @Autowired annotations for page objects class / classes
 * generate steps- in .feature file press 'alt+enter' shortcut and choose 'Create step definition' option, choose created steps class / steps classes to paste steps
 * create custom page objects classes with methods and with @Component and @Autowired annotations for webdriver manager
-* to use PageFactory, extend page object class / classes with BasePage class and add annotations: @Lazy and @PageObject
+* to use PageFactory, extend page object class / classes with BasePage class and add annotation: @PageObject
 * create assertions classes with methods and @Component annotation
 * delete example .feature files, steps classes, page objects classes and assertion classes
 

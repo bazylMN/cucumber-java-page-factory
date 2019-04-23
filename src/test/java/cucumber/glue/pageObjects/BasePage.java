@@ -6,14 +6,13 @@ import org.openqa.selenium.support.PageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 
-@Lazy
 @PageObject
-public class BasePage {
+public abstract class BasePage {
 
     @Autowired
-    private WebDriverManager driver;
+    private WebDriverManager webDriverManager;
 
-    public BasePage(WebDriverManager driver) {
-        PageFactory.initElements(driver.getDriver(), this);
+    public BasePage(WebDriverManager webDriverManager) {
+        PageFactory.initElements(webDriverManager.getDriver(), this);
     }
 }

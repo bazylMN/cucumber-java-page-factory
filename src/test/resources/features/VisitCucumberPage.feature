@@ -1,16 +1,12 @@
 Feature: As a user i want to visit cucumber pages
 
-Scenario: Visit cucumber pages
-  Given I go to "https://cucumber.io/" page
-    Then I should be on "https://cucumber.io/" page
+  Scenario Outline: Visit cucumber pages
+    Given I go to <home> page
+    Then I should be on <home> page
     When I click jam on menu
-    Then I should be on "https://cucumber.io/jam" page
-    When I go to "https://cucumber.io/training" page
-    Then I should be on "https://cucumber.io/training" page
-
-
-Scenario: Visit another cucumber pages
-  Given I go to "https://docs.cucumber.io/gherkin/" page
-    Then I should be on "https://docs.cucumber.io/gherkin/" page
-    When I go to "https://docs.cucumber.io/tools/related-tools/" page
-    Then I should be on "https://docs.cucumber.io/tools/related-tools/" page
+    Then I should be on <jam> page
+    When I go to <training> page
+    Then I should be on <training> page
+    Examples:
+      |home                 |jam                     |training                     |
+      |https://cucumber.io/ |https://cucumber.io/jam |https://cucumber.io/training |
